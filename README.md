@@ -169,7 +169,7 @@ You can also install the server locally, so you have more control over it. In th
 
 Below we describe the two different ways to set up your InfraNodus MCP server.
 
-### Easiest Setup: Smithery InfraNodus MCP Server (via HTTP/SSE)
+### 1. Easiest Setup: Smithery InfraNodus MCP Server (via HTTP/SSE)
 
 0. **Prerequisites**
 
@@ -226,13 +226,33 @@ Below we describe the two different ways to set up your InfraNodus MCP server.
 
 **Note**, in both cases, you'll automatically get the `YOUR_SMITHERY_KEY` and `YOUR_SMITHERY_PROFILE` values from Smithery when you copy the URL with credentials. These are not your InfraNodus API keys. You can use the InfraNodus API server without the API for the first 70 calls. Then you can add it to your Smithery profile and it will automatically connect to your account using the link above.
 
-4. **Use InfraNodus Tools in Your Calls**
+4. **Using InfraNodus Tools in Your Calls**
 
 - To use InfraNodus, see the tools available and simply call them through the chat interface (e.g. "show me the graphs where I talk about this topic" or "get the content gaps from the document I uploaded")
 
 - If your client is not using InfraNodus for some actions, add the instruction to use InfraNodus explicitly.
 
-### Manual Setup: Local Server
+### 2. Manual Setup: via NPX
+
+You can deploy the InfraNodus server manually via `npx` — a package that allows to execute local and remote Node.Js packages on your computer.
+
+The InfraNodus MCP server is also available as an npm package at [https://www.npmjs.com/package/infranodus-mcp-server](https://www.npmjs.com/package/infranodus-mcp-server) from where you can launch it remotely on your local computer with npx. It will expose its tools to the MCP client that will be using this command to launch the server
+
+#### For Claude Desktop:
+
+Just add this in your Claude's configuration file (Settings > Developer > Edit Config), inside the `"mcpServers"` object where the different servers are listed:
+
+```json
+   "infranodus": {
+			"command": "npx",
+			"args": ["-y", "infranodus-mcp-server"],
+			"env": {
+				"INFRANODUS_API_KEY": "YOUR_INFRANODUS_API_KEY"
+			}
+   },
+```
+
+### 3. Manual Setup: Launching MCP as a Local Server (for inspection & development)
 
 0. **Prerequisites**
 
@@ -274,19 +294,33 @@ Note that `build:inspect` will generate the `dist/index.js` file which you will 
 
 2. Add the InfraNodus server configuration:
 
-   ```json
-   {
-   	"mcpServers": {
-   		"infranodus": {
-   			"command": "node",
-   			"args": ["/absolute/path/to/mcp-server-infranodus/dist/index.js"],
-   			"env": {
-   				"INFRANODUS_API_KEY": "your-api-key-here"
-   			}
-   		}
-   	}
-   }
-   ```
+a. remote launch via `npx`:
+
+```json
+ "infranodus": {
+			"command": "npx",
+			"args": ["-y", "infranodus-mcp-server"],
+			"env": {
+				"INFRANODUS_API_KEY": "YOUR_INFRANODUS_API_KEY"
+			}
+   },
+```
+
+b. launch this repo with `node`:
+
+```json
+{
+	"mcpServers": {
+		"infranodus": {
+			"command": "node",
+			"args": ["/absolute/path/to/mcp-server-infranodus/dist/index.js"],
+			"env": {
+				"INFRANODUS_API_KEY": "your-api-key-here"
+			}
+		}
+	}
+}
+```
 
 **Note:** you can leave the `INFRANODUS_API_KEY` empty in which case you can make 70 free requests after which you will hit quota and will need to add your API key.
 
@@ -302,19 +336,33 @@ Note that `build:inspect` will generate the `dist/index.js` file which you will 
 
 2. Add the InfraNodus server configuration:
 
-   ```json
-   {
-   	"mcpServers": {
-   		"infranodus": {
-   			"command": "node",
-   			"args": ["C:\\path\\to\\mcp-server-infranodus\\dist\\index.js"],
-   			"env": {
-   				"INFRANODUS_API_KEY": "your-api-key-here"
-   			}
-   		}
-   	}
-   }
-   ```
+a. remote launch via `npx`:
+
+```json
+ "infranodus": {
+			"command": "npx",
+			"args": ["-y", "infranodus-mcp-server"],
+			"env": {
+				"INFRANODUS_API_KEY": "YOUR_INFRANODUS_API_KEY"
+			}
+   },
+```
+
+b. launch this repo with `node`:
+
+```json
+{
+	"mcpServers": {
+		"infranodus": {
+			"command": "node",
+			"args": ["C:\\path\\to\\mcp-server-infranodus\\dist\\index.js"],
+			"env": {
+				"INFRANODUS_API_KEY": "your-api-key-here"
+			}
+		}
+	}
+}
+```
 
 3. Restart Claude Desktop.
 
@@ -322,7 +370,13 @@ Note that `build:inspect` will generate the `dist/index.js` file which you will 
 
 ### Other MCP-Compatible Applications
 
-For other applications supporting MCP, use the following command to start the server:
+For other applications supporting MCP, use the following command to start the server via npx:
+
+```bash
+INFRANODUS_API_KEY=your-api-key npx -y infranodus-mcp-server
+```
+
+or locally
 
 ```bash
 INFRANODUS_API_KEY=your-api-key node /path/to/mcp-server-infranodus/dist/index.js
@@ -354,6 +408,8 @@ npm run dev
 Test the server with the MCP Inspector:
 
 ```bash
+
+npm run build:inspect
 npm run inspect
 ```
 
