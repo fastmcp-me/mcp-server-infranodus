@@ -1,5 +1,6 @@
 export { generateKnowledgeGraphTool } from "./generateKnowledgeGraph.js";
 export { createKnowledgeGraphTool } from "./createKnowledgeGraph.js";
+export { addMemoryTool } from "./addMemory.js";
 export { analyzeExistingGraphTool } from "./analyzeExistingGraph.js";
 export { generateContentGapsTool } from "./generateContentGaps.js";
 export { generateTopicalClustersTool } from "./generateTopicalClusters.js";
