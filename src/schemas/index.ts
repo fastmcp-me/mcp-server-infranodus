@@ -76,7 +76,7 @@ export const AddMemorySchema = z.object({
 		.min(1, "Graph name is required")
 		.max(28, "Graph name must be less than 28 characters")
 		.describe(
-			"Name of the graph to add the memory to in InfraNodus. Use the name from the conversation context if available, if not, auto-generate from the name of the client or project or as the user explicitly. "
+			"Name of the graph to add the memory to in InfraNodus - lowercase, dashes for spaces, no special characters. Auto-generate from the context of the conversation (if previously available) or use the nanme of the LLM client or project, or use the name the user explicitly provided or requested."
 		),
 	text: z
 		.string()
