@@ -5,6 +5,7 @@ import { configSchema, serverInfo } from "./config/index.js";
 import {
 	generateKnowledgeGraphTool,
 	addMemoryTool,
+	getMemoryTool,
 	createKnowledgeGraphTool,
 	analyzeExistingGraphTool,
 	generateContentGapsTool,
@@ -71,6 +72,12 @@ export default function createServer({
 		addMemoryTool.name,
 		addMemoryTool.definition,
 		wrapHandler(addMemoryTool.handler)
+	);
+
+	mcpServer.registerTool(
+		getMemoryTool.name,
+		getMemoryTool.definition,
+		wrapHandler(getMemoryTool.handler)
 	);
 
 	mcpServer.registerTool(

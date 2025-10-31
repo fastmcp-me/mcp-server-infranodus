@@ -82,7 +82,7 @@ export const AddMemorySchema = z.object({
 		.string()
 		.min(1, "Text is required for analysis")
 		.describe(
-			"Text that you'd like to analyze. Use new lines to separate separate statements, relations, and paragraphs in each text (but not the sentences). Detect the entities in every statement and use [[wikilinks]] syntax to mark them, unless the user explicitly requests automatic entity detection."
+			"Text that you'd like to analyze. Use new lines to separate separate statements, relations, and paragraphs in each text (but not the sentences). Detect the entities in every statement and use [[wikilinks]] syntax to mark them, unless the user explicitly requests automatic entity detection. Every statement should have at least two entities marked."
 		),
 	includeStatements: z
 		.boolean()
@@ -157,6 +157,21 @@ export const SearchExistingGraphsSchema = z.object({
 		.default([])
 		.describe(
 			"Names of the existing InfraNodus graphs to search in (comma-separated list, empty for all)"
+		),
+});
+
+export const getMemorySchema = z.object({
+	entityName: z
+		.string()
+		.default("")
+		.describe(
+			"Name of the entity to get relations for from the InfraNodus memory, use [[wikilinks]] syntax to mark the entity, replace spaces with underscores. Leave if contextMemoryName is provided."
+		),
+	memoryContextName: z
+		.string()
+		.default("")
+		.describe(
+			"Name of the existing InfraNodus memory graph to search in if requested or needed from the context (can be left empty to search in all memory graphs)"
 		),
 });
 
