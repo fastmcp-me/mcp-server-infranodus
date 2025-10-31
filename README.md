@@ -47,7 +47,7 @@ InfraNodus MCP Server enables LLM workflows and AI assistants to analyze text us
    - Make sure to beyond genetic insights and detect smaller topics
    - Use the topical clusters to establish topical authority for SEO
 
-5. **generate_text_overview**
+5. **generate_contextual_hint**
 
 - Generate a topical overview of a text and provide insights for LLMs to generate better responses
 - Use it to get a high-level understanding of a text
