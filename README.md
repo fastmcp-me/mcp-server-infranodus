@@ -16,6 +16,7 @@ InfraNodus MCP Server enables LLM workflows and AI assistants to analyze text us
 - Identify the main topical clusters in discourse without missing the important nuances (works better than standard LLM workflows)
 - Identify the content gaps in any discourse (helpful for content creation and research)
 - Generate new knowledge graphs from any text and use them to augment your LLM responses
+- Save and retrieve entities and relations from memory using the knowledge graphs
 
 ### Available Tools
 
@@ -82,10 +83,10 @@ InfraNodus MCP Server enables LLM workflows and AI assistants to analyze text us
 
 10. **develop_conceptual_bridges**
 
-   - Analyze text and develop latent ideas based on concepts that connect this text to a broader discourse
-   - Discover hidden themes and patterns that link your text to wider contexts
-   - Use any AI model (included in InfraNodus API)
-   - Generate insights that help develop the discourse
+- Analyze text and develop latent ideas based on concepts that connect this text to a broader discourse
+- Discover hidden themes and patterns that link your text to wider contexts
+- Use any AI model (included in InfraNodus API)
+- Generate insights that help develop the discourse
 
 11. **develop_latent_topics**
 
@@ -176,6 +177,25 @@ _More capabilites coming soon!_
 - **AI Enhancement**: Optional AI-powered topic naming and analysis
 - **Structural Analysis**: Identify influential nodes and community structures
 - **Network Structure Statistics**: Modularity, centrality, betweenness, and other graph metrics
+- **Knowledge Graph Memory**: Save and retrieve knowledge graph memories and analyze them to retrieve key nodes, clusters, and connectors
+
+## Knowledge Graph Memory Use Advice
+
+InfraNodus represents any text as a network graph in order to identify the main clusters of ideas and gaps between them. This helps generate advanced insights based on the text's structure. The network is effectively a knowledge graph that can also be used to retrieve complex ontological relations between different entities and concepts. This process is automated in InfraNodus using the `search` and `fetch` tools along with the other tools that analyze the underlying network.
+
+However, you can also easily use InfraNodus as a more traditional memory server to save and retrieve relations. We use [[wikilinks]] to highlight entities in your text to make your content and graphs compatible with markup syntax and PKM tools such as Obsidian. By default, InfraNodus will generate the name of the memory graph for you based on the context of the conversation. However, you can modify this default behavior by adding a **system prompt** or **project instruction** into your LLM client.
+
+Specifically you can specify to always use a speciic knowlege graph for memories to store everything in one place:
+
+```
+Save all memories in the `my-memories` graph in InfraNodus.
+```
+
+Or you can ask InfraNodus to only save certain entities, e.g. for building social networks:
+
+```
+When generating entities, only extract people, companies, and organizations. Ignore everything else.
+```
 
 ## Installation
 
