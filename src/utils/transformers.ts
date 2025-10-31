@@ -113,7 +113,7 @@ export function generateGaps(data: GraphResponse): GapsOutput {
 	return gaps;
 }
 
-export function generateTextOverview(data: GraphResponse): GraphOverview {
+export function generateContextualHint(data: GraphResponse): GraphOverview {
 	const graphOverview: GraphOverview = {};
 
 	if (data.graphSummary) {

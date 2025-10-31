@@ -10,6 +10,11 @@ export const generateKnowledgeGraphTool = {
 		description:
 			"Analyze text and generate a knowledge graph with main topics, topical clusters, concepts, concepts relations and structural gaps.",
 		inputSchema: GenerateGraphSchema.shape,
+		annotations: {
+			readOnlyHint: true,
+			idempotentHint: true,
+			destructiveHint: false,
+		},
 	},
 	handler: async (params: z.infer<typeof GenerateGraphSchema>) => {
 		try {
