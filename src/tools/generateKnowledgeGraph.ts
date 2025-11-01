@@ -29,7 +29,10 @@ export const generateKnowledgeGraphTool = {
 				includeStatements: params.includeStatements ? "true" : "false",
 				includeGraphSummary: "false",
 				extendedGraphSummary: "true",
-				includeGraph: includeGraph || buildingEntitiesGraph ? "true" : "false",
+				includeGraph:
+					includeGraph || buildingEntitiesGraph || includeNodesAndEdges
+						? "true"
+						: "false",
 				compactGraph: includeGraph || buildingEntitiesGraph ? "true" : "false",
 				compactStatements: params.includeStatements ? "true" : "false",
 				aiTopics: "true",
